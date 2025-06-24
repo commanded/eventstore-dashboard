@@ -48,7 +48,7 @@ defmodule EventStore.Dashboard do
 
           to = live_dashboard_path(socket, socket.assigns.page, eventstore: inspect(event_store))
 
-          {:ok, push_redirect(socket, to: to)}
+          {:ok, push_navigate(socket, to: to)}
         end
 
       {:error, error} ->
@@ -97,7 +97,7 @@ defmodule EventStore.Dashboard do
   end
 
   @impl PageBuilder
-  def render_page(assigns) do
+  def render(assigns) do
     if assigns[:error] do
       render_error(assigns)
     else
@@ -111,7 +111,7 @@ defmodule EventStore.Dashboard do
            method: :patch}
         end
 
-      nav_bar(items: items, nav_param: :eventstore, extra_params: [:nav], style: :bar)
+      live_nav_bar(items: items, nav_param: :eventstore, extra_params: [:nav], style: :bar)
     end
   end
 
@@ -178,7 +178,7 @@ defmodule EventStore.Dashboard do
     if assigns[:error] do
       render_error(assigns)
     else
-      nav_bar(
+      live_nav_bar(
         items: [
           streams: [
             name: "Streams",
@@ -233,12 +233,8 @@ defmodule EventStore.Dashboard do
       end
 
     row(
-      components: [
-        columns(
-          components: [
-            card(value: error_message)
-          ]
-        )
+      col: [
+        card(value: error_message)
       ]
     )
   end

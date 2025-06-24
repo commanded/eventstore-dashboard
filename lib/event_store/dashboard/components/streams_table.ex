@@ -7,7 +7,7 @@ defmodule EventStore.Dashboard.Components.StreamsTable do
   # See: https://hexdocs.pm/phoenix_live_dashboard/Phoenix.LiveDashboard.PageBuilder.html
 
   def render(event_store, _assigns) do
-    table(
+    live_table(
       columns: table_columns(),
       default_sort_by: :stream_id,
       id: :event_store_streams_table,

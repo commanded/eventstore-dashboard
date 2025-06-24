@@ -65,7 +65,7 @@ defmodule EventStore.Dashboard.Components.EventsTable do
         do: "All stream events",
         else: "Stream #{inspect(stream_uuid)} events"
 
-    table(
+    live_table(
       columns: table_columns(stream_uuid),
       default_sort_by: :event_number,
       id: :event_store_streams_table,
